@@ -52,7 +52,9 @@ CLIENT_SECRET = st.secrets["Orcid_Secret"]
 # REDIRECT_URI = "https://mag4-data-sharing.streamlit.app/ORCID_login"
 # REDIRECT_URI = "https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login"
 # 'https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login'
-REDIRECT_URI = "https://mag4datasharing-app.streamlit.app/ORCID_login"
+# REDIRECT_URI = "https://mag4datasharing-app.streamlit.app/ORCID_login"
+REDIRECT_URI = "https://mag4datasharing-app.streamlit.app/Browse_Datasets"
+
 
 st.title("ORCID Authentication")
 
