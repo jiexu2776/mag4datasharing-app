@@ -67,9 +67,16 @@ st.session_state.is_authenticated = False #st.session_state.get("is_authenticate
 if not st.session_state.is_authenticated:
     # Orcid login button
     if st.button("Login with ORCID"):
+
+        st.markdown(
+        f"""
+        <meta http-equiv="refresh" content="0; url={authorization_url}">
+        """,
+        unsafe_allow_html=True
+        )
         # Redirect user to Orcid for authorization
-        authorization_url = f"https://orcid.org/oauth/authorize?client_id={CLIENT_ID}&response_type=code&scope=/authenticate&redirect_uri={REDIRECT_URI}"
-        st.write(f"Click [here]({authorization_url}) to log in with Orcid.")
+        # authorization_url = f"https://orcid.org/oauth/authorize?client_id={CLIENT_ID}&response_type=code&scope=/authenticate&redirect_uri={REDIRECT_URI}"
+        # st.write(f"Click [here]({authorization_url}) to log in with Orcid.")
 
         # Check if the authorization code is present in the URL
         url = st.query_params # st.experimental_get_query_params()
