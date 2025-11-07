@@ -66,14 +66,40 @@ st.session_state.is_authenticated = False #st.session_state.get("is_authenticate
 
 if not st.session_state.is_authenticated:
     # Orcid login button
-    if st.button("Login with ORCID"):
-        authorization_url = f"https://orcid.org/oauth/authorize?client_id={CLIENT_ID}&response_type=code&scope=/authenticate&redirect_uri={REDIRECT_URI}"
+    
+    params = {
+        "client_id": CLIENT_ID,
+        "response_type": "code",
+        "scope": "openid /authenticate",
+        "redirect_uri": REDIRECT_URI,
+    }
+    authorization_url = "https://orcid.org/oauth/authorize?" + urllib.parse.urlencode(params)
+    
+    st.title("ORCID Authentication")
+    
+    if st.button("🔑 Login with ORCID"):
+        # Top-level redirect (avoids iframe issue)
         st.markdown(
-        f"""
-        <meta http-equiv="refresh" content="0; url={authorization_url}">
-        """,
-        unsafe_allow_html=True
+            f"""
+            <script>
+            window.top.location.href = "{authorization_url}";
+            </script>
+            """,
+            unsafe_allow_html=True,
         )
+    
+    
+    
+    
+    
+    # if st.button("Login with ORCID"):
+    #     authorization_url = f"https://orcid.org/oauth/authorize?client_id={CLIENT_ID}&response_type=code&scope=/authenticate&redirect_uri={REDIRECT_URI}"
+    #     st.markdown(
+    #     f"""
+    #     <meta http-equiv="refresh" content="0; url={authorization_url}">
+    #     """,
+    #     unsafe_allow_html=True
+    #     )
         # Redirect user to Orcid for authorization
         # authorization_url = f"https://orcid.org/oauth/authorize?client_id={CLIENT_ID}&response_type=code&scope=/authenticate&redirect_uri={REDIRECT_URI}"
         # st.write(f"Click [here]({authorization_url}) to log in with Orcid.")
