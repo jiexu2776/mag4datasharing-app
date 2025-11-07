@@ -1,129 +1,99 @@
 import streamlit as st
 from requests.auth import HTTPBasicAuth
 import requests
+import urllib.parse  # <-- you were missing this import
 
-# ------ Functions
-# Get ORCID token
-def get_orcid_token(authorization_response):
-    token_url = "https://orcid.org/oauth/token"
-    token_data = {
-        "grant_type": "authorization_code",
-        "code": authorization_response,
-        "redirect_uri": REDIRECT_URI,
-    }
-    auth = HTTPBasicAuth(CLIENT_ID, CLIENT_SECRET)
-    response = requests.post(token_url, data=token_data, auth=auth)
-
-    if response.status_code == 200:
-        return response.json().get("access_token")
-    else:
-        return None
-
-# Get ORCID user info
-def get_orcid_user_info(orcid_token):
-    if not orcid_token:
-        return None
-
-    user_info_url = "https://orcid.org/oauth/userinfo"
-    headers = {
-        "Authorization": f"Bearer {orcid_token}",
-        "Accept": "application/json",
-    }
-
-    response = requests.get(user_info_url, headers=headers)
-
-    if response.status_code == 200:
-        user_info = response.json()
-        return user_info
-        return {
-            "name": user_info.get("name", ""),
-            "orcid": user_info.get("sub", ""),  # Using 'sub' as Orcid ID, you may need to adjust this based on the response format
-        }
-    else:
-        return st.error('info response error')
-
-
-# ------ Webpage
+# -------------------- Config
 CLIENT_ID = st.secrets["Orcid_ID"]
 CLIENT_SECRET = st.secrets["Orcid_Secret"]
-# ORCID_API_URL = "https://pub.orcid.org/v3.0/"
-# REDIRECT_URI = "https://orcid-app-u9tbyykcsuwozua46jf3hk.streamlit.app/"
-# REDIRECT_URI = "https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/"
-# REDIRECT_URI = "https://mag4-data-sharing.streamlit.app/ORCID_login"
-# REDIRECT_URI = "https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login"
-# 'https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login'
-# REDIRECT_URI = "https://mag4datasharing-app.streamlit.app/ORCID_login"
-REDIRECT_URI = "https://mag4datasharing-app.streamlit.app/Browse_Datasets"
 
+# IMPORTANT: This must EXACTLY match one of the Redirect URIs registered in your ORCID app
+# If you've registered /ORCID_login there, use that. If you've registered /Browse_Datasets, keep it.
+REDIRECT_URI = "https://mag4datasharing-app.streamlit.app/ORCID_login"
 
+# -------------------- Helpers
+def get_orcid_token(code: str):
+    resp = requests.post(
+        "https://orcid.org/oauth/token",
+        data={"grant_type": "authorization_code", "code": code, "redirect_uri": REDIRECT_URI},
+        auth=HTTPBasicAuth(CLIENT_ID, CLIENT_SECRET),
+        timeout=20,
+    )
+    return resp.json().get("access_token") if resp.status_code == 200 else None
+
+def get_orcid_user_info(access_token: str):
+    resp = requests.get(
+        "https://orcid.org/oauth/userinfo",
+        headers={"Authorization": f"Bearer {access_token}", "Accept": "application/json"},
+        timeout=20,
+    )
+    if resp.status_code == 200:
+        return resp.json()
+    else:
+        return None  # avoid st.error inside helpers
+
+# -------------------- Session init (do NOT reset every run)
+if "is_authenticated" not in st.session_state:
+    st.session_state.is_authenticated = False
+if "orcid_token" not in st.session_state:
+    st.session_state.orcid_token = None
+if "orcid_user_info" not in st.session_state:
+    st.session_state.orcid_user_info = None
+
+# -------------------- UI
 st.title("ORCID Authentication")
+st.info("Click the button to sign in with ORCID. You’ll be redirected to ORCID and back here automatically.")
 
-st.subheader('Works as follows (for the moment):')
-st.info('Click on the button, click on the link, then authenticate. After the redirect to this page, click again on login – and you are all set. This will become more streamlined in the future. To logout, simply return to this page and you will be logged aout fro ORCID.')
+# 1) If redirected back with ?code=..., complete login immediately
+params = st.query_params
+code = params.get("code")
+if isinstance(code, list):
+    code = code[0]
 
-# Check if the user is authenticated
-st.session_state.is_authenticated = False #st.session_state.get("is_authenticated", False)
+if code and not st.session_state.is_authenticated:
+    with st.spinner("Completing ORCID sign-in..."):
+        token = get_orcid_token(code)
+        if token:
+            st.session_state.orcid_token = token
+            st.session_state.orcid_user_info = get_orcid_user_info(token)
+            st.session_state.is_authenticated = True
+            st.success("✅ Logged in with ORCID.")
+        else:
+            st.error("❌ ORCID token exchange failed. Check client ID/secret and redirect URI.")
 
+# 2) Show login button (single-click → top-level redirect)
 if not st.session_state.is_authenticated:
-    # Orcid login button
-    
-    params = {
+    auth_params = {
         "client_id": CLIENT_ID,
         "response_type": "code",
         "scope": "openid /authenticate",
         "redirect_uri": REDIRECT_URI,
     }
-    authorization_url = "https://orcid.org/oauth/authorize?" + urllib.parse.urlencode(params)
-    
-    st.title("ORCID Authentication")
-    
+    authorization_url = "https://orcid.org/oauth/authorize?" + urllib.parse.urlencode(auth_params)
+
     if st.button("🔑 Login with ORCID"):
-        # Top-level redirect (avoids iframe issue)
+        # Force top-level navigation (avoids iframe “refused to connect”)
         st.markdown(
             f"""
             <script>
-            window.top.location.href = "{authorization_url}";
+            if (window.top) {{
+                window.top.location.href = "{authorization_url}";
+            }} else {{
+                window.location.href = "{authorization_url}";
+            }}
             </script>
             """,
             unsafe_allow_html=True,
         )
-    
-    
-    
-    
-    
-    # if st.button("Login with ORCID"):
-    #     authorization_url = f"https://orcid.org/oauth/authorize?client_id={CLIENT_ID}&response_type=code&scope=/authenticate&redirect_uri={REDIRECT_URI}"
-    #     st.markdown(
-    #     f"""
-    #     <meta http-equiv="refresh" content="0; url={authorization_url}">
-    #     """,
-    #     unsafe_allow_html=True
-    #     )
-        # Redirect user to Orcid for authorization
-        # authorization_url = f"https://orcid.org/oauth/authorize?client_id={CLIENT_ID}&response_type=code&scope=/authenticate&redirect_uri={REDIRECT_URI}"
-        # st.write(f"Click [here]({authorization_url}) to log in with Orcid.")
 
-        # Check if the authorization code is present in the URL
-        url = st.query_params # st.experimental_get_query_params()
-        authorization_response = url.get("code", None)
-
-        if authorization_response:
-            # Get Orcid token
-            orcid_token = get_orcid_token(authorization_response)
-
-            if orcid_token:
-                st.session_state.is_authenticated = True
-                st.session_state.orcid_token = orcid_token
-                st.session_state.orcid_user_info = get_orcid_user_info(orcid_token)
-            # This can be de-commented to see what info and metadata are flowing in from ORCID
-                # st.dataframe('orcid_user_info', st.session_state.orcid_user_info)
-                st.success("Successfully logged in with ORCID")
-
-    
-
-# ------ Sidebar
+# 3) Sidebar status
 if st.session_state.is_authenticated:
-    st.sidebar.success("You are logged in with ORCID")
+    st.sidebar.success("✅ You are logged in with ORCID")
+    if st.session_state.orcid_user_info:
+        u = st.session_state.orcid_user_info
+        st.write(
+            f"**Name:** {u.get('name','—')}  \n"
+            f"**ORCID iD:** {u.get('sub','—')}"
+        )
 else:
-    st.sidebar.error('You are not loged in to ORCID')
+    st.sidebar.warning("🔒 You are not logged in to ORCID")
