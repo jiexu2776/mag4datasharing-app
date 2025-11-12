@@ -7,17 +7,16 @@ import requests
 
 
 
-# import streamlit as st
+def login_screen():
+    st.header("This app is private.")
+    st.subheader("Please log in.")
+    st.button("Log in with Microsoft", on_click=st.login)
 
-if not getattr(st.user, "is_logged_in", False):
-    st.button("Sign in with ORCID", on_click=st.login, args=["orcid"])
-    st.stop()  # avoid running the rest of the app before login
 
-st.button("Log out", on_click=st.logout)
-
-# Example of using user info after login
-st.write(f"Welcome, {getattr(st.user, 'name', 'ORCID user')}!")
-st.write(st.user.to_dict())  # see available claims from ORCID
+if not st.user.is_logged_in:
+    login_screen()
+else:
+    st.user
 
 
     # st.button("Log out", on_click=st.logout)
