@@ -6,8 +6,8 @@ import requests
 # Get ORCID token
 
 
-if st.button('ORCID'):
-    st.login('ORCID')
+if st.button('Google'):
+    st.login('Google')
 
 
 
