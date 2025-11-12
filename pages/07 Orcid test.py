@@ -6,19 +6,24 @@ import requests
 # Get ORCID token
 
 
-
-def login_screen():
-    st.header("This app is private.")
-    st.subheader("Please log in.")
-    st.button("Log in with Microsoft", on_click=st.login)
+if st.button('ORCID'):
+    st.login('ORCID')
 
 
-# st.write(st.secrets["client_id"])
 
-if not st.user.is_logged_in:
-    login_screen()
-else:
-    st.user
+
+# def login_screen():
+#     st.header("This app is private.")
+#     st.subheader("Please log in.")
+#     st.button("Log in with Microsoft", on_click=st.login)
+
+
+# # st.write(st.secrets["client_id"])
+
+# if not st.user.is_logged_in:
+#     login_screen()
+# else:
+#     st.user
 
 
     # st.button("Log out", on_click=st.logout)
