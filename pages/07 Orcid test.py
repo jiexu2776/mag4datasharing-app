@@ -19,7 +19,7 @@ else:
     st.user
 
 
-    st.button("Log out", on_click=st.logout)
+    # st.button("Log out", on_click=st.logout)
 
 
 
