@@ -13,6 +13,11 @@ def login_screen():
     st.button("Log in with Microsoft", on_click=st.login)
 
 
+st.write(
+    "Has environment variables been set:",
+    os.environ["db_username"] == st.secrets["client_id"],
+)
+
 if not st.user.is_logged_in:
     login_screen()
 else:
