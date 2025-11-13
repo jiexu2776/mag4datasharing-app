@@ -14,7 +14,9 @@ import streamlit as st
 
 if not st.user.is_logged_in:
     if st.button("Log in with ORCID"):
-        st.login()
+        st.login("orcid")
+    if st.button("Log in with Google"):
+        st.login("google")
     st.stop()
 
 
