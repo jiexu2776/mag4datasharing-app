@@ -11,13 +11,21 @@ import requests
 
 
 if not st.user.is_logged_in:
-    if st.button("Log in with Google"):
+    if st.button("Log in with ORCID"):
         st.login()
     st.stop()
 
+
 if st.button("Log out"):
     st.logout()
+
 st.markdown(f"Welcome! {st.user.name}")
+
+st.json(st.experimental_users)
+
+
+
+
 
 
 # if st.button('Google'):
