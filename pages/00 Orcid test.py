@@ -14,7 +14,7 @@ import streamlit as st
 
 if not st.user.is_logged_in:
     st.header("Log in:")
-    if st.button("Log in with google"):
+    if st.button("Log in with Google"):
         st.login("google")
         # st.success("Successfully logged in with ORCID")
     # if st.button("Log in with Google"):
@@ -29,8 +29,8 @@ if not st.user.is_logged_in:
 st.json(st.user)
 # st.image(st.user.picture)
 
-if st.user.is_logged_in:
-    st.write(st.user)
+# if st.user.is_logged_in:
+#     st.write(st.user)
 
 
 
