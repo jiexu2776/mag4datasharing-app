@@ -44,46 +44,46 @@ def get_orcid_user_info(orcid_token):
 
 
 # ------ Webpage
-CLIENT_ID = st.secrets["Orcid_ID"]
-CLIENT_SECRET = st.secrets["Orcid_Secret"]
-# ORCID_API_URL = "https://pub.orcid.org/v3.0/"
-# REDIRECT_URI = "https://orcid-app-u9tbyykcsuwozua46jf3hk.streamlit.app/"
-# REDIRECT_URI = "https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/"
-# REDIRECT_URI = "https://mag4-data-sharing.streamlit.app/ORCID_login"
-# REDIRECT_URI = "https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login"
-# 'https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login'
-REDIRECT_URI = "https://mag4datasharing-app.streamlit.app/ORCID_login"
+# CLIENT_ID = st.secrets["Orcid_ID"]
+# CLIENT_SECRET = st.secrets["Orcid_Secret"]
+# # ORCID_API_URL = "https://pub.orcid.org/v3.0/"
+# # REDIRECT_URI = "https://orcid-app-u9tbyykcsuwozua46jf3hk.streamlit.app/"
+# # REDIRECT_URI = "https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/"
+# # REDIRECT_URI = "https://mag4-data-sharing.streamlit.app/ORCID_login"
+# # REDIRECT_URI = "https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login"
+# # 'https://geo-cosmo-data-sharing-platform-bvniuih82j6l2aeq3jxfyb.streamlit.app/ORCID_login'
+# REDIRECT_URI = "https://mag4datasharing-app.streamlit.app/ORCID_login"
+# st.success("Successfully logged in with ORCID")
+# st.title("ORCID Authentication")
 
-st.title("ORCID Authentication")
+# st.subheader('Works as follows (for the moment):')
+# st.info('Click on the button, click on the link, then authenticate. After the redirect to this page, click again on login – and you are all set. This will become more streamlined in the future. To logout, simply return to this page and you will be logged aout fro ORCID.')
 
-st.subheader('Works as follows (for the moment):')
-st.info('Click on the button, click on the link, then authenticate. After the redirect to this page, click again on login – and you are all set. This will become more streamlined in the future. To logout, simply return to this page and you will be logged aout fro ORCID.')
+# # Check if the user is authenticated
+# st.session_state.is_authenticated = False #st.session_state.get("is_authenticated", False)
 
-# Check if the user is authenticated
-st.session_state.is_authenticated = False #st.session_state.get("is_authenticated", False)
+# if not st.session_state.is_authenticated:
+#     # Orcid login button
+#     if st.button("Login with ORCID"):
+#         # Redirect user to Orcid for authorization
+#         authorization_url = f"https://orcid.org/oauth/authorize?client_id={CLIENT_ID}&response_type=code&scope=/authenticate&redirect_uri={REDIRECT_URI}"
+#         st.write(f"Click [here]({authorization_url}) to log in with Orcid.")
 
-if not st.session_state.is_authenticated:
-    # Orcid login button
-    if st.button("Login with ORCID"):
-        # Redirect user to Orcid for authorization
-        authorization_url = f"https://orcid.org/oauth/authorize?client_id={CLIENT_ID}&response_type=code&scope=/authenticate&redirect_uri={REDIRECT_URI}"
-        st.write(f"Click [here]({authorization_url}) to log in with Orcid.")
+#         # Check if the authorization code is present in the URL
+#         url = st.query_params # st.experimental_get_query_params()
+#         authorization_response = url.get("code", None)
 
-        # Check if the authorization code is present in the URL
-        url = st.query_params # st.experimental_get_query_params()
-        authorization_response = url.get("code", None)
+#         if authorization_response:
+#             # Get Orcid token
+#             orcid_token = get_orcid_token(authorization_response)
 
-        if authorization_response:
-            # Get Orcid token
-            orcid_token = get_orcid_token(authorization_response)
-
-            if orcid_token:
-                st.session_state.is_authenticated = True
-                st.session_state.orcid_token = orcid_token
-                st.session_state.orcid_user_info = get_orcid_user_info(orcid_token)
+#             if orcid_token:
+#                 st.session_state.is_authenticated = True
+#                 st.session_state.orcid_token = orcid_token
+#                 st.session_state.orcid_user_info = get_orcid_user_info(orcid_token)
             # This can be de-commented to see what info and metadata are flowing in from ORCID
                 # st.dataframe('orcid_user_info', st.session_state.orcid_user_info)
-                st.success("Successfully logged in with ORCID")
+                
 
     
 
