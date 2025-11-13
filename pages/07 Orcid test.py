@@ -23,6 +23,8 @@ if not st.user.is_logged_in:
 st.button("Log out", on_click=st.logout)
 st.markdown(f"Welcome! {st.user.name}")
 
+st.write(st.session_state)
+
 
 # ------ Sidebar
 if st.session_state.is_authenticated:
