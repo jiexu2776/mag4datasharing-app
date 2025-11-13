@@ -24,7 +24,11 @@ st.button("Log out", on_click=st.logout)
 st.markdown(f"Welcome! {st.user.name}")
 
 
-
+# ------ Sidebar
+if st.session_state.is_authenticated:
+    st.sidebar.success("You are logged in with ORCID")
+else:
+    st.sidebar.error('You are not loged in to ORCID')
 
 
 # if st.button('Google'):
