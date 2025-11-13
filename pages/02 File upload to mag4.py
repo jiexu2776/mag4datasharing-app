@@ -74,7 +74,7 @@ st.header('Choose file to upload')
 df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
 
 # Depends on whether a user is logged in to Orcid -> False when logged in
-if st.session_state.is_authenticated:
+if st.user:
     file_uploader_enable_parameter=False
 else:
     file_uploader_enable_parameter=True
@@ -94,8 +94,8 @@ if uploaded_file is not None:
 # ---------- Metadata Fields
     st.header('Metadata')
     st.subheader('Mandatory')
-    st.text_input('ORCID', st.session_state.st.user['sub'], disabled=True)
-    st.text_input('Name', st.session_state.st.user['name'], disabled=True)
+    st.text_input('ORCID', st.user['sub'], disabled=True)
+    st.text_input('Name', st.user['name'], disabled=True)
     # meta_email = st.text_input('Email address', value=None, placeholder='Email addressyour email address')
     meta_title = st.text_input('Title', uploaded_file.name.split('.')[0], disabled=True)
     if meta_title in df_metadata['Title'].values:
