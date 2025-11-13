@@ -86,8 +86,8 @@ with tab2:
 #         return f"Error: Unable to fetch files. Status code: {response.status_code}"
 # metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
 # df_metadata = pd.DataFrame(metadata_files).T
-#
-# # ------ Siedbar
+
+# ------ Siedbar
 if st.user.is_logged_in:
     st.sidebar.success("You are logged in with ORCID")
 else:
