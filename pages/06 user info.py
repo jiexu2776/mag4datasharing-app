@@ -34,8 +34,9 @@ if st.user.is_logged_in:
     st.sidebar.info("You are logged in with Orcid.")
 
     # Display Orcid user info automatically
-    orcid_user_info = get_orcid_user_info(st.session_state.orcid_token)
-    st.write('response.status_code', orcid_user_info)
+    # orcid_user_info = get_orcid_user_info(st.session_state.orcid_token)
+    orcid_user_info = st.user
+    st.write('response.status_code', st.user)
     if orcid_user_info:
         st.write("Orcid User Information:")
         # st.write(f"Name: {orcid_user_info['name']}")
