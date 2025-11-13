@@ -36,11 +36,11 @@ if st.user.is_logged_in:
     # Display Orcid user info automatically
     # orcid_user_info = get_orcid_user_info(st.session_state.orcid_token)
     orcid_user_info = st.user
-    st.write('response.status_code', st.user)
     if orcid_user_info:
         st.write("Orcid User Information:")
         # st.write(f"Name: {orcid_user_info['name']}")
         # st.write(f"Orcid ID: {orcid_user_info['orcid']}")
+    st.write('response.status_code', st.user)
 
     # Your existing Streamlit content goes here
     st.title('Your uploaded files')
