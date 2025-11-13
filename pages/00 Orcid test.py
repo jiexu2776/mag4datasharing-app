@@ -20,13 +20,14 @@ if not st.user.is_logged_in:
     if st.button("Log in with Google"):
         st.login("google")
         # st.success("Successfully logged in with Google")
-    st.stop()
+    # st.stop()
 
-else:
-    if st.button("Log out"):
-        st.logout()
-    st.write(f"Hello, {st.user.name}!")
-
+# else:
+#     if st.button("Log out"):
+#         st.logout()
+st.write(f"Hello, {st.user.name}!")
+st.json(st.user)
+st.image(st.user.picture)
 
 if st.user.is_logged_in:
     st.write(st.user)
