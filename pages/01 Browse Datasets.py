@@ -3,6 +3,8 @@ import requests
 import pandas as pd
 #import json
 
+st.write(st.secrets['GitHub_Token'])
+
 # ------ Functions
 def get_metadata(repo_owner, repo_name, folder, file_name):
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}/{file_name}.json'
