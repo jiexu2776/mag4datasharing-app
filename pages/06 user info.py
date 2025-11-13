@@ -40,7 +40,7 @@ if st.user.is_logged_in:
         st.write("Orcid User Information:")
         # st.write(f"Name: {orcid_user_info['name']}")
         # st.write(f"Orcid ID: {orcid_user_info['orcid']}")
-    st.write('response.status_code', st.user)
+    st.write(st.user)
 
     # Your existing Streamlit content goes here
     st.title('Your uploaded files')
