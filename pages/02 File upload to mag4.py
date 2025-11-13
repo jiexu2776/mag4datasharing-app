@@ -94,7 +94,7 @@ if uploaded_file is not None:
 # ---------- Metadata Fields
     st.header('Metadata')
     st.subheader('Mandatory')
-    st.text_input('ORCID', st.user['iss'] + '/' + st.user['sub'], disabled=True)
+    st.text_input('ORCID', st.user['sub'], disabled=True)
     st.text_input('Name', st.user['name'], disabled=True)
     # meta_email = st.text_input('Email address', value=None, placeholder='Email addressyour email address')
     meta_title = st.text_input('Title', uploaded_file.name.split('.')[0], disabled=True)
@@ -122,7 +122,7 @@ if uploaded_file is not None:
     st.subheader('Preview')
     json_metadata = {
         # , jupyter notebook
-        "ORCID": str(st.user['iss'] + '/' + st.user['sub']),
+        "ORCID": str(st.user['sub']),
         "Name": st.user['name'],
         # "Email": meta_email if meta_email is not None else 'still required',
         "Title": uploaded_file.name.split('.')[0],
