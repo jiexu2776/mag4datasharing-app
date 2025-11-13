@@ -94,8 +94,8 @@ if uploaded_file is not None:
 # ---------- Metadata Fields
     st.header('Metadata')
     st.subheader('Mandatory')
-    st.text_input('ORCID', st.session_state.orcid_user_info['id'], disabled=True)
-    st.text_input('Name', st.session_state.orcid_user_info['given_name'] +' '+ st.session_state.orcid_user_info['family_name'], disabled=True)
+    st.text_input('ORCID', st.session_state.st.user['sub'], disabled=True)
+    st.text_input('Name', st.session_state.st.user['name'], disabled=True)
     # meta_email = st.text_input('Email address', value=None, placeholder='Email addressyour email address')
     meta_title = st.text_input('Title', uploaded_file.name.split('.')[0], disabled=True)
     if meta_title in df_metadata['Title'].values:
@@ -173,7 +173,8 @@ if uploaded_file is not None:
             st.error(f"Error uploading file to GitHub. Status Code: {response.status_code}, Response: {response.text}")
 
 
-if st.session_state.is_authenticated:
+if st.user.is_logged_in:
     st.sidebar.success("You are logged in with ORCID")
 else:
-    st.sidebar.error("ORCID login required for full functionality")
+    st.sidebar.error('You are not loged in to ORCID')
+
