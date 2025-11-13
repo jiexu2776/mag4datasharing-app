@@ -5,7 +5,7 @@ st.title('Your Datasets')
 
 if st.user.is_logged_in == True:
     df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
-    df_metadata_personal = df_metadata[df_metadata['ORCID'] == st.session_state.orcid_user_info['id'].split('/')[-1]]
+    df_metadata_personal = df_metadata[df_metadata['ORCID'] == st.user['id'].split('/')[-1]]
 
     df_metadata_personal.insert(0, 'update', False)
     df_metadata_personal.insert(0, 'delete', False)
