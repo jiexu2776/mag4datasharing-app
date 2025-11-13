@@ -56,11 +56,10 @@ with tab2:
 
 
 # ------ Siedbar
-if st.session_state.is_authenticated:
+if st.user.is_logged_in:
     st.sidebar.success("You are logged in with ORCID")
 else:
-    st.sidebar.error("ORCID login required for full functionality")
-
+    st.sidebar.error('You are not loged in to ORCID')
 
 
 # ------ Retired
@@ -92,3 +91,12 @@ else:
 #         return f"Error: Unable to fetch files. Status code: {response.status_code}"
 # metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
 # df_metadata = pd.DataFrame(metadata_files).T
+
+if st.user.is_logged_in:
+    st.sidebar.success("You are logged in with ORCID")
+else:
+    st.sidebar.error('You are not loged in to ORCID')
+
+if st.sidebar.button("Log out"):
+    st.logout()
+
