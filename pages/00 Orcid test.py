@@ -21,7 +21,8 @@ st.write("User:", getattr(st.user, "is_logged_in", None))
 st.write("Secrets auth section:", st.secrets.get("auth"))
 
 st.json(st.user)
-st.write(st.session_state)
+
+st.write("session station:", st.session_state)
 
 
 # ------ Sidebar
