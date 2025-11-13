@@ -26,10 +26,10 @@ st.write("session station:", st.session_state)
 
 
 # ------ Sidebar
-# if st.session_state.is_authenticated:
-#     st.sidebar.success("You are logged in with ORCID")
-# else:
-#     st.sidebar.error('You are not loged in to ORCID')
+if st.user.is_logged_in:
+    st.sidebar.success("You are logged in with ORCID")
+else:
+    st.sidebar.error('You are not loged in to ORCID')
 
 
 # if st.button('Google'):
