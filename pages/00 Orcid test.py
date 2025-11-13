@@ -27,7 +27,7 @@ if not st.user.is_logged_in:
 #         st.logout()
 # st.write(f"Hello, {st.user.name}!")
 st.json(st.user)
-st.image(st.user.picture)
+# st.image(st.user.picture)
 
 if st.user.is_logged_in:
     st.write(st.user)
