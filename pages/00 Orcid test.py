@@ -2,29 +2,18 @@ import streamlit as st
 from requests.auth import HTTPBasicAuth
 import requests
 
-# ------ Functions
-# Get ORCID token
-
-
-# if st.button('Google'):
-#     st.login('Google')
-
-
-import streamlit as st
 
 if not st.user.is_logged_in:
     st.header("Log in:")
     if st.button("Log in with ORCID"):
         st.login("orcid")
-        # st.success("Successfully logged in with ORCID")
-    if st.button("Log in with Google"):
+    if st.button("Log in with GOOGLE"):
         st.login("google")
-        st.success("Successfully logged in with Google")
     st.stop()
-
 else:
     if st.button("Log out"):
         st.logout()
+
 st.write(f"Hello, {st.user.name}!")
 
 st.write("Query params:", st.experimental_get_query_params())
@@ -32,12 +21,7 @@ st.write("User:", getattr(st.user, "is_logged_in", None))
 st.write("Secrets auth section:", st.secrets.get("auth"))
 
 st.json(st.user)
-# st.image(st.user.picture)
-
-# if st.user.is_logged_in:
-#     st.write(st.user)
-
-
+st.warite(st.session_state)
 
 
 # ------ Sidebar
