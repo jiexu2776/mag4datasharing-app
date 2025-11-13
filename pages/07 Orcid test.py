@@ -21,8 +21,10 @@ if not st.user.is_logged_in:
         # st.success("Successfully logged in with Google")
     st.stop()
 
-st.user
+if st.user.is_logged_in:
+    st.write(st.user)
 
+    
 st.button("Log out", on_click=st.logout)
 st.markdown(f"Welcome! {st.user.name}")
 
