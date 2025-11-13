@@ -3,7 +3,6 @@ import requests
 import pandas as pd
 #import json
 
-st.write(st.secrets['GitHub_Token'])
 
 # ------ Functions
 def get_metadata(repo_owner, repo_name, folder, file_name):
@@ -57,12 +56,6 @@ with tab2:
         
 
 
-# ------ Siedbar
-if st.user.is_logged_in:
-    st.sidebar.success("You are logged in with ORCID")
-else:
-    st.sidebar.error('You are not loged in to ORCID')
-
 
 # ------ Retired
 # Get Metadata from all files in the metadata folder – no longer required, kept for maybe later
@@ -93,7 +86,8 @@ else:
 #         return f"Error: Unable to fetch files. Status code: {response.status_code}"
 # metadata_files = get_json("Hezel2000", "mag4datasets", "metadata")
 # df_metadata = pd.DataFrame(metadata_files).T
-
+#
+# # ------ Siedbar
 if st.user.is_logged_in:
     st.sidebar.success("You are logged in with ORCID")
 else:
