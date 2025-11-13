@@ -13,6 +13,7 @@ import requests
 import streamlit as st
 
 if not st.user.is_logged_in:
+    st.header("Log in:")
     if st.button("Log in with ORCID"):
         st.login("orcid")
         # st.success("Successfully logged in with ORCID")
@@ -21,21 +22,23 @@ if not st.user.is_logged_in:
         # st.success("Successfully logged in with Google")
     st.stop()
 
+else:
+    if st.button("Log out"):
+        st.logout()
+    st.write(f"Hello, {st.user.name}!")
+
+
 if st.user.is_logged_in:
     st.write(st.user)
 
-    
-st.button("Log out", on_click=st.logout)
-st.markdown(f"Welcome! {st.user.name}")
 
-st.write(st.session_state)
 
 
 # ------ Sidebar
-if st.session_state.is_authenticated:
-    st.sidebar.success("You are logged in with ORCID")
-else:
-    st.sidebar.error('You are not loged in to ORCID')
+# if st.session_state.is_authenticated:
+#     st.sidebar.success("You are logged in with ORCID")
+# else:
+#     st.sidebar.error('You are not loged in to ORCID')
 
 
 # if st.button('Google'):
