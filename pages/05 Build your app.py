@@ -2,7 +2,11 @@ import streamlit as st
 
 st.title('How to build an App around your dataset')
 
-if st.session_state.is_authenticated == True:
-    st.header('Test')
+if st.user.is_logged_in:
+    st.sidebar.success("You are logged in with ORCID")
 else:
-    st.subheader('Login with ORCID to see content')
+    st.sidebar.error('You are not loged in to ORCID')
+
+if st.sidebar.button("Log out"):
+    st.logout()
+

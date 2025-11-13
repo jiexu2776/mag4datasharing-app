@@ -11,6 +11,3 @@ else:
 if st.sidebar.button("Log out"):
     st.logout()
 
-if st.sidebar.button("Log out"):
-    st.logout()
-
