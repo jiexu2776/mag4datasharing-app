@@ -45,3 +45,12 @@ if st.user.is_logged_in:
     # Your existing Streamlit content goes here
     st.title('Your uploaded files')
     st.write('A simply filtered table with your uploaded datasets, with a number of editing options: update, delete (restricted!)')
+
+
+if st.user.is_logged_in:
+    st.sidebar.success("You are logged in with ORCID")
+else:
+    st.sidebar.error('You are not loged in to ORCID')
+
+if st.sidebar.button("Log out"):
+    st.logout()
