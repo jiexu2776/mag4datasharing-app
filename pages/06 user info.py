@@ -31,7 +31,7 @@ def get_orcid_user_info(orcid_token):
 
 # Display user info if authenticated
 if st.user.is_logged_in:
-    st.sidebar.info("You are logged in with Orcid.")
+    # st.sidebar.info("You are logged in with Orcid.")
 
     # Display Orcid user info automatically
     # orcid_user_info = get_orcid_user_info(st.session_state.orcid_token)
