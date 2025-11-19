@@ -52,6 +52,9 @@ with tab2:
     else:
         dataset_metadata = get_metadata("jiexu2776", "mag4datasets", "metadata", sel_dataset)
         st.table(dataset_metadata)
+        st.write("Type of file_urls:", type(file_urls))
+        st.write("file_urls value:", file_urls)
+        st.write("sel_dataset:", sel_dataset)
         st.dataframe(pd.read_csv(file_urls[sel_dataset]))
         
 
