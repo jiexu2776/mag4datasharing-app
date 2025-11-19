@@ -36,7 +36,7 @@ def get_csv_urls(repo_owner, repo_name, folder):
 
 # ------ Webpage
 st.title('Browse Dataset Info & Content')
-df_metadata = pd.read_csv('https://raw.githubusercontent.com/Hezel2000/mag4datasets/main/overview_available_datasets.csv')
+df_metadata = pd.read_csv('https://raw.githubusercontent.com/jiexu2776/mag4datasets/main/overview_available_datasets.csv')
 
 tab1, tab2 = st.tabs(['All Datasets', 'Select a Dataset'])
 
@@ -50,7 +50,7 @@ with tab2:
     if sel_dataset == None:
         st.write('')
     else:
-        dataset_metadata = get_metadata("Hezel2000", "mag4datasets", "metadata", sel_dataset)
+        dataset_metadata = get_metadata("jiexu2776", "mag4datasets", "metadata", sel_dataset)
         st.table(dataset_metadata)
         st.dataframe(pd.read_csv(file_urls[sel_dataset]))
         
