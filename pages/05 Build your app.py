@@ -18,11 +18,15 @@ if st.sidebar.button("Log out"):
 
 
 
-with st.expander("🔍 See example apps (mag4 App Library)"):
-    st.markdown(
-        """
-        Visit the mag4 **App Library** to see example apps built around geological data:
+st.markdown(
+    """
+### 🔗 Looking for inspiration?
 
-        **https://hezel2000.github.io/mag4/allapps/allapps.html**
-        """
-    )
+You can find working example apps here:
+
+- **[Visualising Geochemical Databases](https://hezel2000.github.io/mag4/allapps/allapps.html)** (via mag4 App Library)  
+- Other tools for microprobe, TAS classification, database exploration, and more.
+
+These examples show what you can build once your dataset is uploaded and structured.
+"""
+)
