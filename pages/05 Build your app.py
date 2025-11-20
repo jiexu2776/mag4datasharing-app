@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pyrolite.geochem.norm import get_reference_composition
 from pyrolite.plot.spider import spider
+import requests
 
 st.title('How to build an App around your dataset')
 
