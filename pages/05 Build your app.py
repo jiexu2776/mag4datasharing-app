@@ -18,3 +18,11 @@ if st.sidebar.button("Log out"):
 
 
 
+with st.expander("🔍 See example apps (mag4 App Library)"):
+    st.markdown(
+        """
+        Visit the mag4 **App Library** to see example apps built around geological data:
+
+        **https://hezel2000.github.io/mag4/allapps/allapps.html**
+        """
+    )
