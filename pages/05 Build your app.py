@@ -1,4 +1,8 @@
 import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from pyrolite.geochem.norm import get_reference_composition
+from pyrolite.plot.spider import spider
 
 st.title('How to build an App around your dataset')
 
@@ -12,12 +16,36 @@ if st.sidebar.button("Log out"):
 
 
 
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
 
-from pyrolite.geochem.norm import get_reference_composition
-from pyrolite.plot.spider import spider
+
+# ------ Functions
+def get_metadata(repo_owner, repo_name, folder, file_name):
+    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}/{file_name}.json'
+    github_token = st.secrets['GitHub_Token']
+    headers = {'Authorization': f'Bearer {github_token}'}
+    response = requests.get(url, headers=headers)
+    file_url = response.json()['download_url']
+    file_content_response = requests.get(file_url, headers=headers)
+    return file_content_response.json()
+
+@st.cache_data
+def get_csv_urls(repo_owner, repo_name, folder):
+    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{folder}'
+    github_token = st.secrets['GitHub_Token']
+    headers = {'Authorization': f'Bearer {github_token}'}
+    
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        files = [file for file in response.json() if file['name'].endswith('.csv')]
+        
+        # Fetch and store the contents of each JSON file
+        file_urls = {}
+        for file in files:
+            file_urls[file['name'].split('.')[0]] = file['download_url']
+        return file_urls
+    else:
+        return f"Error: Unable to fetch files. Status code: {response.status_code}"
 
 st.title('Browse Dataset Info & Content')
 
