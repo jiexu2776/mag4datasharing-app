@@ -1,10 +1,9 @@
 import streamlit as st
 
-st.title('🧩How to prepare your dataset before upload')
+st.title('How to prepare your dataset before upload')
 
 st.markdown(
     """
-
 - Your file must be provided as a **CSV**.
 
 - For best results, we encourage you to prepare your dataset following the
