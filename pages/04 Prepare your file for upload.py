@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title('How to prepare your dataset before upload')
+st.title('How to prepare your dataset for upload 📁')
 
 st.markdown(
     """
