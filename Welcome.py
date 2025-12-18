@@ -39,9 +39,9 @@ else:
         st.logout()
 
 # st.write(f"Hello, {st.user.name}!")
-st.markdown(
-    f"<p style='font-size: 1.8rem; font-weight: 600;'>🌋 Hello, {st.user.name}!</p>",
-    unsafe_allow_html=True
+# st.markdown(
+#     f"<p style='font-size: 1.8rem; font-weight: 600;'>🌋 Hello, {st.user.name}!</p>",
+#     unsafe_allow_html=True
 )
 
 
