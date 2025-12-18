@@ -27,7 +27,7 @@ view, update, and manage them directly in this interface.
 
 
 
-if not st.user.is_logged_in:
+if not st.user or not st.user.is_logged_in:
     st.header("Log in:")
     if st.button("Log in with ORCID"):
         st.login("orcid")
@@ -39,10 +39,10 @@ else:
         st.logout()
 
 # st.write(f"Hello, {st.user.name}!")
-# st.markdown(
-#     f"<p style='font-size: 1.8rem; font-weight: 600;'>🌋 Hello, {st.user.name}!</p>",
-#     unsafe_allow_html=True
-# )
+st.markdown(
+    f"<p style='font-size: 1.8rem; font-weight: 600;'>🌋 Hello, {st.user.name}!</p>",
+    unsafe_allow_html=True
+)
 
 
 
