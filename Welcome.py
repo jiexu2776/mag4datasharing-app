@@ -42,7 +42,7 @@ else:
 # st.markdown(
 #     f"<p style='font-size: 1.8rem; font-weight: 600;'>🌋 Hello, {st.user.name}!</p>",
 #     unsafe_allow_html=True
-)
+# )
 
 
 
