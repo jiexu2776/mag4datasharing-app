@@ -47,6 +47,9 @@ if st.user.is_logged_in:
     st.write("User dict:", st.user.to_dict())
 
 
+
+print(df_metadata.columns)
+
 # if st.button('Google'):
 #     st.login('Google')
 

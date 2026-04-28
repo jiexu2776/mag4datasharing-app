@@ -38,6 +38,9 @@ def get_csv_urls(repo_owner, repo_name, folder):
 st.title('Browse Dataset Info & Content')
 df_metadata = pd.read_csv('https://raw.githubusercontent.com/jiexu2776/mag4datasets/main/overview_available_datasets.csv')
 
+
+print(df_metadata.columns)
+
 tab1, tab2 = st.tabs(['All Datasets', 'Select a Dataset'])
 
 with tab1:
@@ -63,7 +66,7 @@ with tab2:
         st.dataframe(pd.read_csv(file_urls[sel_dataset]))
         
 
-print(df_metadata.columns)
+
 
 # ------ Retired
 # Get Metadata from all files in the metadata folder – no longer required, kept for maybe later
