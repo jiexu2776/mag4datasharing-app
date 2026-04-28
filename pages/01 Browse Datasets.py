@@ -48,10 +48,10 @@ with tab1:
         df_metadata,
         column_order=[
             'Title', 
-            'Keywords', 
             'Name', 
             'ORCID', 
             'Upload Date', 
+            'Keywords', 
             'Short Title', 
             'Description', 
             'Licence',     
