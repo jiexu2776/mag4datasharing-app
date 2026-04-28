@@ -39,14 +39,14 @@ st.title('Browse Dataset Info & Content')
 df_metadata = pd.read_csv('https://raw.githubusercontent.com/jiexu2776/mag4datasets/main/overview_available_datasets.csv')
 
 
-print(df_metadata.columns)
+#print(df_metadata.columns)
 
 tab1, tab2 = st.tabs(['All Datasets', 'Select a Dataset'])
 
 with tab1:
     st.dataframe(
         df_metadata,
-        column_order=['Title', 'Short Title', 'Source', 'Type', 'Description', 'Keywords', 'Author', 'ORCID', 'License', 'Upload Date', 'Creation Data', 'dois', 'Request doi' , 'Comment', 'Reference']
+        #column_order=['Title', 'Short Title', 'Source', 'Type', 'Description', 'Keywords', 'Author', 'ORCID', 'License', 'Upload Date', 'Creation Data', 'dois', 'Request doi' , 'Comment', 'Reference']
     )
 
 
