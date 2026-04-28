@@ -46,7 +46,23 @@ tab1, tab2 = st.tabs(['All Datasets', 'Select a Dataset'])
 with tab1:
     st.dataframe(
         df_metadata,
-        #column_order=['Title', 'Short Title', 'Source', 'Type', 'Description', 'Keywords', 'Author', 'ORCID', 'License', 'Upload Date', 'Creation Data', 'dois', 'Request doi' , 'Comment', 'Reference']
+        column_order=[
+            'Title', 
+            'Short Title', 
+            'Name', 
+            'ORCID', 
+            'Upload Date', 
+            'Keywords', 
+            'Description', 
+            'Licence',     
+            'Source', 
+            'Type',  
+            'Creation Date', 
+            'dois', 
+            'Request doi', 
+            'Comment', 
+            'References'  
+        ]
     )
 
 
