@@ -41,7 +41,10 @@ df_metadata = pd.read_csv('https://raw.githubusercontent.com/jiexu2776/mag4datas
 tab1, tab2 = st.tabs(['All Datasets', 'Select a Dataset'])
 
 with tab1:
-    st.dataframe(df_metadata)
+    st.dataframe(
+        df_metadata,
+        column_orders=['Title', 'Short Title', 'Source', 'Type', 'Description', 'Keywords', 'Author', 'ORCID', 'License', 'Upload Date', 'Creation Data', 'dois', 'Request doi' , 'Comment']
+    )
 
 with tab2:
     file_urls = get_csv_urls("jiexu2776", "mag4datasets", "data")
