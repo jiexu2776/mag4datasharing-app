@@ -46,6 +46,8 @@ with tab1:
         column_order=['Title', 'Short Title', 'Source', 'Type', 'Description', 'Keywords', 'Author', 'ORCID', 'License', 'Upload Date', 'Creation Data', 'dois', 'Request doi' , 'Comment', 'Reference']
     )
 
+
+
 with tab2:
     file_urls = get_csv_urls("jiexu2776", "mag4datasets", "data")
     sel_dataset = st.selectbox('sel', df_metadata['Title'].sort_values(), index=None, placeholder='click to select a dataset', label_visibility='collapsed')
@@ -61,7 +63,7 @@ with tab2:
         st.dataframe(pd.read_csv(file_urls[sel_dataset]))
         
 
-
+print(df_metadata.columns)
 
 # ------ Retired
 # Get Metadata from all files in the metadata folder – no longer required, kept for maybe later
