@@ -43,7 +43,7 @@ tab1, tab2 = st.tabs(['All Datasets', 'Select a Dataset'])
 with tab1:
     st.dataframe(
         df_metadata,
-        column_orders=['Title', 'Short Title', 'Source', 'Type', 'Description', 'Keywords', 'Author', 'ORCID', 'License', 'Upload Date', 'Creation Data', 'dois', 'Request doi' , 'Comment']
+        column_order=['Title', 'Short Title', 'Source', 'Type', 'Description', 'Keywords', 'Author', 'ORCID', 'License', 'Upload Date', 'Creation Data', 'dois', 'Request doi' , 'Comment', 'Reference']
     )
 
 with tab2:
