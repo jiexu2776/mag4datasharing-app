@@ -26,6 +26,7 @@ st.json(st.user)
 
 st.write("session station:", st.session_state)
 
+print(st.user.is_logged_in)
 
 
 
