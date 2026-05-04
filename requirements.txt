@@ -1,11 +1,22 @@
-streamlit>=1.42.0
+streamlit[auth]>=1.42.0
 pandas
 datetime
-Authlib>=1.3.2
 matplotlib
 pyrolite
 requests
 
+
+
+
+
+# streamlit>=1.42.0
+# pandas
+# datetime
+# Authlib>=1.3.2
+# matplotlib
+# pyrolite
+# requests
+# streamlit[auth]>=1.40.0
 
 # The following are not required, as these are std python libraries, and therefore already available
 #pathlib
