@@ -38,11 +38,6 @@ else:
     if st.button("Log out"):
         st.logout()
 
-try:
-    # Your login code here
-    login_user()
-except Exception as e:
-    st.error(f"Actual Error: {e}")
 
 # st.write(f"Hello, {st.user.name}!")
 
