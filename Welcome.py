@@ -26,14 +26,13 @@ view, update, and manage them directly in this interface.
 )
 # if not st.user or not st.user.is_logged_in:
 
-print(st.user)
 
 if not st.user or not st.user.is_logged_in:
     st.header("Log in:")
     if st.button("Log in with ORCID"):
         st.login("orcid")
-    # if st.button("Log in with GOOGLE"):
-    #     st.login("google")
+    if st.button("Log in with GOOGLE"):
+        st.login("google")
     st.stop()
 else:
     if st.button("Log out"):
