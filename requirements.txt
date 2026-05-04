@@ -1,14 +1,25 @@
-streamlit>=1.42.0
+streamlit==1.56.0
+Authlib==1.6.11
 pandas
 datetime
-# oauthlib
-# requests-oauthlib
-Authlib>=1.3.2
 matplotlib
 pyrolite
 requests
+httpx
 
+
+
+
+# streamlit>=1.42.0
+# pandas
+# datetime
+# Authlib>=1.3.2
+# matplotlib
+# pyrolite
+# requests
 
 # The following are not required, as these are std python libraries, and therefore already available
 #pathlib
 #base64
+# oauthlib
+# requests-oauthlib

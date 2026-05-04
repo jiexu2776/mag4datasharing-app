@@ -26,6 +26,7 @@ st.json(st.user)
 
 st.write("session station:", st.session_state)
 
+print(st.user.is_logged_in)
 
 
 
@@ -45,6 +46,9 @@ if st.user.is_logged_in:
     st.write("User dir:", dir(st.user))
     st.write("User dict:", st.user.to_dict())
 
+
+
+print(df_metadata.columns)
 
 # if st.button('Google'):
 #     st.login('Google')

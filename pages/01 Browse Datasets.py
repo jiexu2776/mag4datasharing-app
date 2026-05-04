@@ -38,10 +38,34 @@ def get_csv_urls(repo_owner, repo_name, folder):
 st.title('Browse Dataset Info & Content')
 df_metadata = pd.read_csv('https://raw.githubusercontent.com/jiexu2776/mag4datasets/main/overview_available_datasets.csv')
 
+
+#print(df_metadata.columns)
+
 tab1, tab2 = st.tabs(['All Datasets', 'Select a Dataset'])
 
 with tab1:
-    st.dataframe(df_metadata)
+    st.dataframe(
+        df_metadata,
+        column_order=[
+            'Title', 
+            'Name', 
+            'ORCID', 
+            'Upload Date', 
+            'Keywords', 
+            'Short Title', 
+            'Description', 
+            'Licence',     
+            'Source', 
+            'Type',  
+            'Creation Date', 
+            'dois', 
+            'Request doi', 
+            'Comment', 
+            'References'  
+        ]
+    )
+
+
 
 with tab2:
     file_urls = get_csv_urls("jiexu2776", "mag4datasets", "data")
