@@ -90,12 +90,17 @@ if uploaded_file is not None:
         f.write(uploaded_file.getbuffer())
     #st.success(f"File saved to {file_path_user_dataset}")
 
+display_name = (
+    user_info.get("name") or 
+    (f"{user_info.get('given_name', '')} {user_info.get('family_name', '')}").strip() or 
+    user_info.get("sub")
+)
 
 # ---------- Metadata Fields
     st.header('Metadata')
     st.subheader('Mandatory')
     st.text_input('ORCID', st.user['sub'], disabled=True)
-    st.text_input('Name', st.user['name'], disabled=True)
+    st.text_input('Name', display_name, disabled=True)
     # meta_email = st.text_input('Email address', value=None, placeholder='Email addressyour email address')
     meta_title = st.text_input('Title', uploaded_file.name.split('.')[0], disabled=True)
     if meta_title in df_metadata['Title'].values:
