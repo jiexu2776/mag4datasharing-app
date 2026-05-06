@@ -90,11 +90,6 @@ if uploaded_file is not None:
         f.write(uploaded_file.getbuffer())
     #st.success(f"File saved to {file_path_user_dataset}")
 
-display_name = (
-    user_info.get("name") or 
-    (f"{user_info.get('given_name', '')} {user_info.get('family_name', '')}").strip() or 
-    user_info.get("sub")
-)
 
 # ---------- Metadata Fields
     st.header('Metadata')
