@@ -123,7 +123,12 @@ if uploaded_file is not None:
     json_metadata = {
         # , jupyter notebook
         "ORCID": str(st.user['sub']),
-        "Name": st.user['name'],
+        # "Name": st.user['name'],
+        "Name": (
+            st.user.get("name") or 
+            f"{st.user.get('given_name', '')} {st.user.get('family_name', '')}".strip() or 
+            st.user.get("sub")
+        ),  
         # "Email": meta_email if meta_email is not None else 'still required',
         "Title": uploaded_file.name.split('.')[0],
         "Short Title": meta_short_title if meta_short_title is not None else 'still required',
