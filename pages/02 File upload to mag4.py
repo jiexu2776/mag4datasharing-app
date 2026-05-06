@@ -92,11 +92,10 @@ if uploaded_file is not None:
 
 
 # ---------- Metadata Fields
-    "Name": (
+    "Name"= (
     st.user.get("name") or 
     f"{st.user.get('given_name', '')} {st.user.get('family_name', '')}".strip() or 
-    st.user.get("sub")
-    )
+    st.user.get("sub"))
     st.header('Metadata')
     st.subheader('Mandatory')
     st.text_input('ORCID', st.user['sub'], disabled=True)
